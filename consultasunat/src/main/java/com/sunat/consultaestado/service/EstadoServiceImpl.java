@@ -10,9 +10,9 @@ public class EstadoServiceImpl implements EstadoService {
 
 	public String consultaRuc(String nRuc) {
 		// TODO Auto-generated method stub
-		String cEst="Activo";
+		String cEst="Inactivo";
 		if (nRuc.equals("12345678901"))
-			cEst="Inactivo";
+			cEst="Activo";
 		return cEst;
 	}
 
