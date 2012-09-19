@@ -7,7 +7,7 @@ USE `3JML` ;
 -- -----------------------------------------------------
 -- Table `3JML`.`MUsuario`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `3JML`.`MUsuario` (
+CREATE  TABLE IF NOT EXISTS `3JML`.`MUsuario`  (
   `UsuCodigo` INT NOT NULL AUTO_INCREMENT ,
   `UsuLogin`  VARCHAR(15) NULL ,
   `UsuClave`  VARCHAR(15) NULL ,
