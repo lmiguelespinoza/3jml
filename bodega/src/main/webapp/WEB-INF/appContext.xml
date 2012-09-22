@@ -15,7 +15,7 @@
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml" />
-            <entry key="json" value="application/json" />
+            <entry key="json" value="application/json"  />
         </jaxrs:extensionMappings>
     </jaxrs:server>
 
