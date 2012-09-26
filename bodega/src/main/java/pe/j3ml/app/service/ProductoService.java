@@ -18,10 +18,10 @@ public interface ProductoService {
     @Path("/new")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void nuevoCliente (
-			@FormParam("nombre") String nombre,
-			@FormParam("precio") String precio,
-			@FormParam("oferta") String oferta,
+	public void nuevoProducto (
+			@FormParam("pNombre") String pNombre,
+			@FormParam("pPrecio") double pPrecio,
+			@FormParam("pOferta") String pOferta,
 			@FormParam("urlReturn") String urlReturn,	
 			@Context HttpServletResponse servletResponse
 	) throws IOException;
