@@ -52,6 +52,8 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `3JML`.`MPromociones` (
   `PrmCodigo` INT NOT NULL AUTO_INCREMENT ,  
   `PrmNombre` VARCHAR(45) NULL ,
+  `PrmFecini` VARCHAR(15) NULL ,
+  `PrmFecfin` VARCHAR(15) NULL ,
   `ProCodigo` INT NOT NULL,
   `PrmCantid` DECIMAL(6,2) NULL ,
   `PrmPrecio` DECIMAL(6,2) NULL ,
@@ -77,9 +79,10 @@ INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProOferta`)
 INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProOferta`) VALUES('COCA COLA','BOTELLA',4.90,'N');
 INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProOferta`) VALUES('CERVEZA CUSQUEÑA','LATA',15.50,'N');
 
-INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012',1,20.00,15.00);
-INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012',5,100.00,50.00);
+INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012','01/01/2012','01/02/2012',1,20.00,15.00);
+INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012','01/09/2012','01/10/2012',5,100.00,50.00);
 
+ 
 INSERT INTO `3JML`.`MCliente` (`CliRUC`,`CliRazonSocial`,`CliDireccion`,`CliDistrito`,`CliTelefono`,`CliCelular`,`CliCorreo`, `CliContacto`,`CliContactoTel`,`CliContactoCor`,`CliEstado`) 
 Values('20102097654','BODEGA CHACARILLA SCR LTDA','JR. JIRON MONTEGRANDE #197','SANTIAGO DE SURCO','365676','365676','bodegachacarilla@3jml.com.pe','','','','Activo');
 
