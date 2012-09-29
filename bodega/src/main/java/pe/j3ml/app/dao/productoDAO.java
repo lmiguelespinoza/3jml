@@ -14,7 +14,7 @@ public class productoDAO extends baseDAO{
 
     public void insertar(Producto vo) throws DAOExcepcion {
         System.out.println("productoDAO: insertar(Producto vo)");
-        String query = "INSERT INTO MPRODUCTO(ProNombre, ProPrecio, ProOferta) VALUES (?,?,?)";
+        String query = "INSERT INTO MPRODUCTO(ProNombre, ProUnivta, ProPrecio, ProStock) VALUES (?,?,?,?)";
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -31,8 +31,9 @@ public class productoDAO extends baseDAO{
             } else {
                 stmt = con.prepareStatement(query);
                 stmt.setString(1, vo.getProNombre());
-                stmt.setDouble(2, vo.getProPrecio());
-                stmt.setString(3, vo.getProOferta());
+                stmt.setString(2, vo.getProUnivta());
+                stmt.setDouble(3, vo.getProPrecio());
+                stmt.setDouble(4, vo.getProStock());
                 int i = stmt.executeUpdate();
                 if (i != 1) {
                     throw new SQLException("Error insertando registro. Consulte DBA!");

@@ -20,8 +20,9 @@ public interface ProductoService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	public void nuevoProducto (
 			@FormParam("pNombre") String pNombre,
+			@FormParam("pUnivta") String pUnivta,
 			@FormParam("pPrecio") double pPrecio,
-			@FormParam("pOferta") String pOferta,
+			@FormParam("pStock") double pStock,
 			@FormParam("urlReturn") String urlReturn,	
 			@Context HttpServletResponse servletResponse
 	) throws IOException;

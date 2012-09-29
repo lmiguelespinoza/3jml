@@ -2,12 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
 
     <jaxrs:server id="userService" address="/">
         <jaxrs:serviceBeans>
@@ -20,5 +22,18 @@
     </jaxrs:server>
 
     <bean id="userServiceImpl" class="pe.j3ml.app.service.impl.ClienteServiceImpl" />
-    
+
+
+    <jaxrs:server id="productoService" address="/">
+        <jaxrs:serviceBeans>
+            <ref bean="productoServiceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="xml" value="application/xml" />
+            <entry key="json" value="application/json"  />
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+
+    <bean id="productoServiceImpl" class="pe.j3ml.app.service.impl.ProductoServiceImpl" />
+
 </beans>

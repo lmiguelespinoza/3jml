@@ -5,13 +5,13 @@ import pe.j3ml.app.dao.productoDAO;
 import pe.j3ml.app.model.Producto;
 
 public class ProductoNegocio {
-	public void insertarProducto(String pNombre, double pPrecio, String pOferta) throws DAOExcepcion {
+	public void insertarProducto(String pNombre, String pUnivta, double pPrecio, double pStock) throws DAOExcepcion {
 
-		if (pNombre == null || pPrecio == 0 || pOferta == null ) {
+		if (pNombre == null ) {
 			System.out.println("PARAMETROS INVALIDOS");
 			throw new DAOExcepcion("PARAMETROS INVALIDOS");
 		} else {
-			Producto producto = new Producto(pNombre,pPrecio,pOferta);
+			Producto producto = new Producto(pNombre, pUnivta, pPrecio, pStock);
 			productoDAO dao = new productoDAO();
 			try {
 				dao.insertar(producto);

@@ -6,19 +6,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Producto {
 	private int proCodigo;
 	private String proNombre;
+	private String proUnivta;
 	private double proPrecio;
-	private String proOferta;
+	private double proStock;
 	
-		
-	public Producto(String proNombre, double proPrecio,String proOferta) {
+	public Producto() {
+		super();
+	}
+	
+	public Producto(String proNombre, String proUnivta,
+			double proPrecio, double proStock) {
 		super();
 		this.proNombre = proNombre;
+		this.proUnivta = proUnivta;
 		this.proPrecio = proPrecio;
-		this.proOferta = proOferta;
+		this.proStock = proStock;
 	}
 
-	public Producto() {}
-	
 	public int getProCodigo() {
 		return proCodigo;
 	}
@@ -31,17 +35,23 @@ public class Producto {
 	public void setProNombre(String proNombre) {
 		this.proNombre = proNombre;
 	}
+	public String getProUnivta() {
+		return proUnivta;
+	}
+	public void setProUnivta(String proUnivta) {
+		this.proUnivta = proUnivta;
+	}
 	public double getProPrecio() {
 		return proPrecio;
 	}
 	public void setProPrecio(double proPrecio) {
 		this.proPrecio = proPrecio;
 	}
-	public String getProOferta() {
-		return proOferta;
+	public double getProStock() {
+		return proStock;
 	}
-	public void setProOferta(String proOferta) {
-		this.proOferta = proOferta;
+	public void setProStock(double proStock) {
+		this.proStock = proStock;
 	}
-		
+			
 }
