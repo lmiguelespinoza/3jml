@@ -11,7 +11,6 @@
 
 	<bean id="estadoService" class="com.sunat.consultaestado.service.EstadoServiceImpl" />
 	
-	<jaxws:endpoint id="estadoServiceEndpoint" implementor="#estadoService"
-		address="/EstadoService" />
+	<jaxws:endpoint id="estadoServiceEndpoint" implementor="#estadoService" address="/EstadoService" />
 
 </beans>
