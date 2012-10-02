@@ -1,5 +1,5 @@
 package pe.j3ml.app.dao;
-
+/*
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,12 +9,11 @@ import java.util.Collection;
 import pe.j3ml.app.excepcion.*;
 import pe.j3ml.app.util.*;
 import pe.j3ml.app.model.*;
-
-
-public class productoDAO extends baseDAO{
-
-    public void insertar(Producto vo) throws DAOExcepcion {
-        System.out.println("productoDAO: insertar(Producto vo)");
+*/
+public class pedidoDAO extends baseDAO {
+/*
+    public void insertar(CPedido vo) throws DAOExcepcion {
+        System.out.println("pedidoDAO: insertar(Pediddo vo)");
         String query = "INSERT INTO MPRODUCTO(ProNombre, ProUnivta, ProPrecio, ProStock) VALUES (?,?,?,?)";
         Connection con = null;
         PreparedStatement stmt = null;
@@ -75,7 +74,8 @@ public class productoDAO extends baseDAO{
 			this.cerrarStatement(cCom);
 			this.cerrarConexion(cCon);
 		}
-		return c;
-	}    
+		return c;	
 	
+	}
+	 */
 }
