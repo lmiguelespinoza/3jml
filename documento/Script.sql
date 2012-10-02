@@ -88,6 +88,17 @@ CREATE TABLE IF NOT EXISTS `3JML`.`MDPedido` (
   PRIMARY KEY (`PedCodigo`,`ProCodigo`) )
 ENGINE = InnoDB;
 
+CREATE  TABLE IF NOT EXISTS `3JML`.`MKardex` (
+  `ProCodigo` INT NOT NULL ,
+  `KrdCantidadReal` DECIMAL(6,2) DEFAULT 0,
+  `KrdTotalPedidos` DECIMAL(6,2) DEFAULT 0,
+  `KrdFechaHoraUltimoPedido` VARCHAR(20)   DEFAULT '' ,
+  PRIMARY KEY(ProCodigo),
+	FOREIGN KEY(ProCodigo)
+    REFERENCES MProducto(ProCodigo)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION )
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -107,6 +118,16 @@ INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProStock`) 
 INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProStock`) VALUES('PAPEL HIGIENICO','PLANCHA',14.99,30);
 INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProStock`) VALUES('COCA COLA','DOCENA',4.90,40);
 INSERT INTO `3JML`.`MProducto` (`ProNombre`,`ProUnivta`,`ProPrecio`,`ProStock`) VALUES('CERVEZA CUSQUEÑA','DOCENA',15.50,50);
+
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(1,10,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(2,20,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(3,30,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(4,40,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(5,10,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(6,20,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(7,30,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(8,40,0,' ');
+INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(9,50,0,' ');
 
 INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012',1,20.00,15.00);
 INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012',5,100.00,50.00);
