@@ -37,7 +37,6 @@ public class PedidoServiceImpl implements PedidoService {
 		det.setProPrecio(pProPrecio);
 		det.setPedParcial(pPedParcial);
 		try {
-			System.out.println("paso1");			
 			neg.insertarPedido(pCliRUC, pPedFecReg,  pPedTotal, det);
 		} catch (DAOExcepcion e) {
 			// TODO Auto-generated catch block

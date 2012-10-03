@@ -3,7 +3,7 @@
 <h2>Pruebas REST</h2>
 	<a href="cliente.jsp">Ingresar nuevo cliente</a>
 	<br />
-	<a href="producto.jsp">Ingresar nuevo producto</a>
+	<a href="producto.jsp">Producto</a>
 	<br />	
 	<a href="rs/producto-service/productos">Obtener productos</a>
 	<br />	

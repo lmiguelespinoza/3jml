@@ -9,12 +9,12 @@ import pe.j3ml.app.model.*;
 
 public class pedidoDAO extends baseDAO {
     public void insertar(CPedido vo) throws DAOExcepcion {
-        System.out.println("pedidoDAO: insertar(Pediddo vo)");        
         Connection con = null;
         PreparedStatement stmt = null;
         try {
-        	Cliente cCli = new Cliente();        	
-            con = ConexionBD.obtenerConexion();
+        	Cliente cCli = new Cliente();    
+        	cCli.setRuc(vo.getCliRUC());
+            con = ConexionBD.obtenerConexion();           
             String qCliente= "SELECT CliRazonSocial,CliDireccion,CliDistrito FROM MCliente WHERE CliRUC=?";
             stmt = con.prepareStatement(qCliente);
             stmt.setString(1, vo.getCliRUC());            
@@ -22,13 +22,11 @@ public class pedidoDAO extends baseDAO {
             rstCliente = stmt.executeQuery();            
             if (rstCliente != null && rstCliente.next() )
             {
-                System.out.println("CLIENTE NO CREADO");
-                throw new DAOExcepcion("CLIENTE NO CREADO");
-            } else {
-
             	cCli.setRazonSocial(rstCliente.getString("CliRazonSocial"));
             	cCli.setDireccion(rstCliente.getString("CliDireccion"));
             	cCli.setDistrito(rstCliente.getString("CliDistrito"));
+            } else {            	
+                throw new DAOExcepcion("CLIENTE NO CREADO");
             }        	        	        	
         	con = ConexionBD.obtenerConexion();
         	String query = "INSERT INTO MCPedido(CliRuc,CliRazonSocial,CliDireccion,CliDistrito,PedFecReg,PedFecAte,PedTotal,PedEstado) VALUES (?,?,?,?,?,?,?,?)";
@@ -47,15 +45,12 @@ public class pedidoDAO extends baseDAO {
             }            
             con = ConexionBD.obtenerConexion();
             String query2 = "SELECT PedCodigo FROM MCPedido WHERE PedEstado='N' And CliRUC=?";
-            stmt.setString(1, vo.getCliRUC());
-            stmt = con.prepareStatement(query2);
+            stmt = con.prepareStatement(query2);            
+            stmt.setString(1, cCli.getRuc());
             ResultSet rs;
             rs = stmt.executeQuery();
             if (rs != null && rs.next() )
             {
-                System.out.println("PEDIDO NO CREADO");
-                throw new DAOExcepcion("PEDIDO NO CREADO");
-            } else {
             	CPedido cReg = new CPedido();
             	cReg.setPedCodigo(rs.getInt("PedCodigo"));
             	String query3 = "INSERT INTO MDPedido(PedCodigo,ProCodigo,PedCantidad,ProPrecio,PedParcial) VALUES (?,?,?,?,?)";            	            	
@@ -68,7 +63,10 @@ public class pedidoDAO extends baseDAO {
                 int ii = stmt.executeUpdate();
                 if (ii != 1) {
                     throw new SQLException("Error insertando registro. Consulte DBA!");
-                }
+                }            	
+            } else {
+                System.out.println("PEDIDO NO CREADO");
+                throw new DAOExcepcion("PEDIDO NO CREADO");
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

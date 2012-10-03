@@ -36,4 +36,17 @@
 
     <bean id="productoServiceImpl" class="pe.j3ml.app.service.impl.ProductoServiceImpl" />
 
+    <jaxrs:server id="pedidoService" address="/">
+        <jaxrs:serviceBeans>
+            <ref bean="pedidoServiceImpl" />
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="xml" value="application/xml" />
+            <entry key="json" value="application/json"  />
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+
+    <bean id="pedidoServiceImpl" class="pe.j3ml.app.service.impl.PedidoServiceImpl" />
+
+
 </beans>

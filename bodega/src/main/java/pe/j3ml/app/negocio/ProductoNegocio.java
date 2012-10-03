@@ -22,6 +22,11 @@ public class ProductoNegocio {
 		}
 	}
 	
+	public Producto obtenerProducto(int pCod) throws DAOExcepcion {
+		productoDAO dao = new productoDAO();
+		return dao.obtener(pCod);
+	}
+	
 	public Collection<Producto> listar() throws DAOExcepcion {
 		productoDAO dao = new productoDAO();
 		return dao.listar();
