@@ -64,7 +64,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `3JML`.`MCPedido` (
   `PedCodigo`      INT         NOT NULL AUTO_INCREMENT,
-  `CliCodigo`      INT DEFAULT   0,  
   `CliRUC`         VARCHAR(15)   DEFAULT '' ,
   `CliRazonSocial` VARCHAR(60)   DEFAULT '' ,
   `CliDireccion`   VARCHAR(60)   DEFAULT '' ,

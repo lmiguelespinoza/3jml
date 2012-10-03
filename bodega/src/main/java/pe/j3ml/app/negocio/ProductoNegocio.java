@@ -4,6 +4,7 @@ import java.util.Collection;
 import pe.j3ml.app.excepcion.DAOExcepcion;
 import pe.j3ml.app.dao.productoDAO;
 import pe.j3ml.app.model.Producto;
+
 public class ProductoNegocio {
 	public void insertarProducto(String pNombre, String pUnivta, double pPrecio, double pStock) throws DAOExcepcion {
 

@@ -5,7 +5,9 @@
 	<br />
 	<a href="producto.jsp">Ingresar nuevo producto</a>
 	<br />	
-	<a href="rs/user-service/users">Obtener productos</a>
+	<a href="rs/producto-service/productos">Obtener productos</a>
+	<br />	
+	<a href="pedido.jsp">Ingresar nuevo pedido</a>
 	<br />	
 </body>
 </html>

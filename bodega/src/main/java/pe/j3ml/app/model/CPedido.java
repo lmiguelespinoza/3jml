@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class CPedido {
 	private int pedCodigo;
-	private int cliCodigo;
 	private String cliRUC;
 	private String cliRazonSocial;
 	private String cliDireccion;
@@ -23,21 +22,11 @@ public class CPedido {
 		super();
 	}
 		
-	public CPedido(int pedCodigo, int cliCodigo, String cliRUC,
-			String cliRazonSocial, String cliDireccion, String cliDistrito,
-			String pedFecReg, String pedFecAte, double pedTotal,
-			String pedEstado, DPedido dpedido) {
+	public CPedido(String cliRUC,String pedFecReg, double pedTotal,DPedido dpedido) {
 		super();
-		this.pedCodigo = pedCodigo;
-		this.cliCodigo = cliCodigo;
 		this.cliRUC = cliRUC;
-		this.cliRazonSocial = cliRazonSocial;
-		this.cliDireccion = cliDireccion;
-		this.cliDistrito = cliDistrito;
 		this.pedFecReg = pedFecReg;
-		this.pedFecAte = pedFecAte;
 		this.pedTotal = pedTotal;
-		this.pedEstado = pedEstado;
 		this.dpedido = dpedido;
 	}
 
@@ -46,12 +35,6 @@ public class CPedido {
 	}
 	public void setPedCodigo(int pedCodigo) {
 		this.pedCodigo = pedCodigo;
-	}
-	public int getCliCodigo() {
-		return cliCodigo;
-	}
-	public void setCliCodigo(int cliCodigo) {
-		this.cliCodigo = cliCodigo;
 	}
 	public String getCliRUC() {
 		return cliRUC;
