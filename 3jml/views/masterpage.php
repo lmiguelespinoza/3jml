@@ -1,5 +1,3 @@
-<? //defined( '_ACCESO' ) or die( header("Location: ".$config->get('url_login')) ); ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>

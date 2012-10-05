@@ -5,56 +5,47 @@ class ServicesController extends ControllerBase
 		header('Location: index.php');
 	}
 	
-	public function validaRucClienteSoap() {
-		@$ruc = $_GET['ruc'];
-		if(!is_null($ruc)) {
-			$estadoSunat    = $this->consulta_ruc_sunat_soap($ruc);			
-			$estadoInfocorp = $this->consulta_ruc_infocorp_soap($ruc);
-			if($estadoSunat == 'Activo' and $estadoInfocorp == 'Activo') {
-				$class  = 'success'; $estado = 'Activo';
-			} else {
-				$class = 'important'; $estado = 'Inactivo';	
-			}
-			$result = array('clase' => $class, 'estado' => $estado);
-		} else {
-			$result = array('clase' => 'info', 'Servicio web no disponible');
-		}
-		echo json_encode($result);
-	}
-	
 	public function validaRucSunat() {
 		@$ruc = $_GET['ruc'];
 		if(!is_null($ruc)) {
-			$estado = $this->consulta_ruc_sunat_soap($ruc);
-			($estado == 'Activo') ? $class = 'success' : $class = 'important';
-			$result = array('clase' => $class, 'estado' => $estado);			
-		} else {
-			$result = array('clase' => 'info', 'Servicio web no disponible');
+			$resultadoSunat = $this->consulta_ruc_sunat_soap($ruc);
+			if($resultadoSunat->estado == 1) {
+				$msj = '<button type=button" class="close" data-dismiss="alert">×</button>
+			            &bull; El nro. de RUC ingresado se encuentra <strong>activo</strong> en la SUNAT.';
+			} elseif($resultadoSunat->estado == 2) {
+				$msj = '<button type=button" class="close" data-dismiss="alert">×</button>
+			            &bull; El nro. de RUC ingresado se encuentra <strong>inactivo</strong> en la SUNAT.';
+			} elseif($resultadoSunat->estado == 3) {
+				$msj = '<button type=button" class="close" data-dismiss="alert">×</button>
+			            &bull; El nro. de RUC ingresado <strong>no existe</strong> en la SUNAT.';
+			}
+			$infocorp = $this->validaRucInfocorp($ruc);			
+			$resultado = array_merge((array) $resultadoSunat, array('msj' => $msj, 'infocorp' => $infocorp));
+			echo json_encode($resultado);
 		}
-		echo json_encode($result);
 	}
-	
-	public function validaRucInfocorp() {
-		@$ruc = $_GET['ruc'];
+		
+	private function validaRucInfocorp($ruc) {
+		$msj = "";
 		if(!is_null($ruc)) {
 			$estado = $this->consulta_ruc_infocorp_soap($ruc);
-			($estado == 'Activo') ? $class = 'success' : $class = 'important';
-			$result = array('clase' => $class, 'estado' => $estado);			
-		} else {
-			$result = array('clase' => 'info', 'Servicio web no disponible');
+			if($estado == 1) {
+				$msj = '<button type=button" class="close" data-dismiss="alert">×</button>
+			            &bull; El nro. de RUC ingresado figura como <strong>deudor</strong> en INFOCORP.';
+			}
 		}
-		echo json_encode($result);
+		return $msj;
 	}
 	
 	private function consulta_ruc_sunat_soap($ruc) {
 		$client = new SoapClient('http://localhost:8081/consultasunat/EstadoService?wsdl', array('trace' => 1));
-		$result = $client->consultaRuc(array('nRuc' => $ruc));
-		return (string) $result->estado;
+		$result = $client->consultarRuc(array('nRuc' => $ruc));
+		return $result->persona;
 	}
 	
 	private function consulta_ruc_infocorp_soap($ruc) {
 		$client = new SoapClient('http://localhost:8081/consultainfocorp/EstadoService?wsdl', array('trace' => 1));
-		$result = $client->consultaRuc(array('nRuc' => $ruc));
+		$result = $client->consultarDeudorRuc(array('nRuc' => $ruc));
 		return (string) $result->estado;
 	}
 
