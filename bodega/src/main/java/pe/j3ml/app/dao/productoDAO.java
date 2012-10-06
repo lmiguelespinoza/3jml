@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+
 import pe.j3ml.app.excepcion.*;
 import pe.j3ml.app.util.*;
 import pe.j3ml.app.model.*;
@@ -48,62 +47,5 @@ public class productoDAO extends baseDAO{
 	    	this.cerrarConexion(con);
 		}
     }	
-    
-	public Collection<Producto> listar() throws DAOExcepcion {
-		Collection<Producto> c = new ArrayList<Producto>();
-		Connection cCon=null;
-		PreparedStatement cCom=null;
-		ResultSet cRst=null;
-		try {
-			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select ProNombre, ProUnivta, ProPrecio, ProStock From MPRODUCTO Order By 1";
-			cCom=cCon.prepareStatement(cSql);
-			cRst=cCom.executeQuery();
-			while (cRst.next()) {
-				Producto cReg = new Producto();
-				cReg.setProNombre(cRst.getString("ProNombre"));
-				cReg.setProUnivta(cRst.getString("ProUnivta"));
-                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
-                cReg.setProStock(cRst.getDouble("ProStock"));
-				c.add(cReg);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new DAOExcepcion(e.getMessage());
-		} finally {
-			this.cerrarResultSet(cRst);
-			this.cerrarStatement(cCom);
-			this.cerrarConexion(cCon);
-		}
-		return c;
-	}    
-
-	public Producto obtener(int pProCodigo) throws DAOExcepcion {
-		Producto cReg = new Producto();
-		Connection cCon=null;
-		PreparedStatement cCom=null;
-		ResultSet cRst=null;
-		try {
-			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select ProNombre, ProUnivta, ProPrecio, ProStock From MPRODUCTO Where ProCodigo=?";
-			cCom=cCon.prepareStatement(cSql);
-			cCom.setInt(1, pProCodigo);
-			cRst=cCom.executeQuery();			  						
-			if (cRst.next()) {				
-				cReg.setProNombre(cRst.getString("ProNombre"));
-				cReg.setProUnivta(cRst.getString("ProUnivta"));
-                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
-                cReg.setProStock(cRst.getDouble("ProStock"));
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new DAOExcepcion(e.getMessage());
-		} finally {
-			this.cerrarResultSet(cRst);
-			this.cerrarStatement(cCom);
-			this.cerrarConexion(cCon);
-		}
-		return cReg;
-	}    
 	
 }

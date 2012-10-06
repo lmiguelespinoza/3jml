@@ -1,6 +1,8 @@
 package pe.j3ml.app.model;
+
 import javax.xml.bind.annotation.XmlRootElement;
-@XmlRootElement(name = "producto")
+
+@XmlRootElement(name = "user")
 public class Producto {
 	private int proCodigo;
 	private String proNombre;
