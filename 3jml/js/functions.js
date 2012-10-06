@@ -1,17 +1,28 @@
 //FUNCIONES DE LA APPWEB
-function getEstadoCliente(input, div){
+$(document).ready(function() {
+	$('#alertMsg').fadeOut(8000);
+});
+
+function getEstadoCliente(input){
     var ruc = $(input).val();
 	if(ruc != '') {
 		$.ajax({
 			type: 'GET',
-			url: 'index.php?controlador=services&accion=validaRucClienteSoap&ruc=' + ruc,
+			url: 'index.php?controlador=services&accion=validaRucSunat&ruc=' + ruc,
 			dataType: 'json',
 			success:function(response){
-				$(div).removeClass('hidden');
-				$(div).html('<span class="label label-'+ response.clase +'">' + response.estado + '</span>');
-				if(response.estado == 'Activo') {
+				if(response.estado == 1) {
+					$('#alertMsg1').removeClass('hidden').addClass('alert-success');					
+					$('#txtRazonSocial').val(response.razonSocial);
+					$('#txtDireccion').val(response.direccion);
+					$('#cboDistrito').val(response.distrito);	
 					activarCampos();
+				} else {
+					$('#alertMsg1').removeClass('hidden').addClass('alert-error');
 				}
+				if(response.infocorp != '') $('#alertMsg2').removeClass('hidden').html(response.infocorp);
+				$('#btnValidarEstadoCliente').html('Verificar estado');
+				$('#alertMsg1').html(response.msj);
 			}
 		});
 	}
@@ -24,6 +35,7 @@ function validarBotonKeypress(obj, btn, e) {
 	  case 8:
 		  activarDesactivarBoton(btn, 0);
 		  clearDivResult();
+		  clearCampos();
 		  desactivarCampos();
 		  break;
 	  default:	  	
@@ -66,6 +78,18 @@ function desactivarCampos() {
 	$('#btnGrabar').attr('disabled','disabled');
 }
 
+function clearCampos() {
+	$('#txtRazonSocial').val('');
+	$('#txtDireccion').val('');
+	$('#cboDistrito').val('');
+	$('#txtTelefono').val('');
+	$('#txtCorreo').val('');
+	$('#txtContacto').val('');
+}
+
 function clearDivResult() {
-	$('#resultEstadoCliente').html('');	
+	$('#alertMsg1').html('');
+	$('#alertMsg1').removeClass().addClass('alert hidden');
+	$('#alertMsg2').html('');
+	$('#alertMsg2').removeClass().addClass('alert hidden');
 }
