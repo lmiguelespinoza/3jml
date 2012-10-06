@@ -1,6 +1,5 @@
 package pe.j3ml.app.negocio;
 
-import java.util.Collection;
 import pe.j3ml.app.excepcion.DAOExcepcion;
 import pe.j3ml.app.dao.productoDAO;
 import pe.j3ml.app.model.Producto;
@@ -21,14 +20,4 @@ public class ProductoNegocio {
 			}
 		}
 	}
-	
-	public Producto obtenerProducto(int pCod) throws DAOExcepcion {
-		productoDAO dao = new productoDAO();
-		return dao.obtener(pCod);
-	}
-	
-	public Collection<Producto> listar() throws DAOExcepcion {
-		productoDAO dao = new productoDAO();
-		return dao.listar();
-	}	
 }
