@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
+
 import pe.j3ml.app.excepcion.*;
 import pe.j3ml.app.util.*;
 import pe.j3ml.app.model.*;
@@ -14,6 +13,7 @@ import pe.j3ml.app.model.*;
 public class productoDAO extends baseDAO{
 
     public void insertar(Producto vo) throws DAOExcepcion {
+        System.out.println("productoDAO: insertar(Producto vo)");
         String query = "INSERT INTO MPRODUCTO(ProNombre, ProUnivta, ProPrecio, ProStock) VALUES (?,?,?,?)";
         Connection con = null;
         PreparedStatement stmt = null;
@@ -47,68 +47,5 @@ public class productoDAO extends baseDAO{
 	    	this.cerrarConexion(con);
 		}
     }	
-    
-	public Collection<Producto> listar() throws DAOExcepcion {
-		Collection<Producto> c = new ArrayList<Producto>();
-		Connection cCon=null;
-		PreparedStatement cCom=null;
-		ResultSet cRst=null;
-		try {
-			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantid,0) PrmCantid,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromociones b On (a.ProCodigo=b.ProCodigo) Order By a.ProNombre";
-			cCom=cCon.prepareStatement(cSql);
-			cRst=cCom.executeQuery();
-			while (cRst.next()) {
-				Producto cReg = new Producto();
-				cReg.setProCodigo(cRst.getInt("ProCodigo"));
-				cReg.setProNombre(cRst.getString("ProNombre"));
-				cReg.setProUnivta(cRst.getString("ProUnivta"));
-                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
-                cReg.setProStock(cRst.getDouble("ProStock"));
-                cReg.setPrmCantid(cRst.getDouble("PrmCantid"));
-                cReg.setPrmPrecio(cRst.getDouble("PrmPrecio"));
-				c.add(cReg);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new DAOExcepcion(e.getMessage());
-		} finally {
-			this.cerrarResultSet(cRst);
-			this.cerrarStatement(cCom);
-			this.cerrarConexion(cCon);
-		}
-		return c;
-	}    
-
-	public Producto obtener(int pProCodigo) throws DAOExcepcion {
-		Producto cReg = new Producto();	
-		Connection cCon=null;
-		PreparedStatement cCom=null;
-		ResultSet cRst=null;
-		try {
-			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantid,0) PrmCantid,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromociones b On (a.ProCodigo=b.ProCodigo) Where a.ProCodigo=?";
-			cCom=cCon.prepareStatement(cSql);
-			cCom.setInt(1, pProCodigo);
-			cRst=cCom.executeQuery();			  						
-			if (cRst.next()) {				
-				cReg.setProCodigo(cRst.getInt("ProCodigo"));
-				cReg.setProNombre(cRst.getString("ProNombre"));
-				cReg.setProUnivta(cRst.getString("ProUnivta"));
-                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
-                cReg.setProStock(cRst.getDouble("ProStock"));
-                cReg.setPrmCantid(cRst.getDouble("PrmCantid"));
-                cReg.setPrmPrecio(cRst.getDouble("PrmPrecio"));
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-			throw new DAOExcepcion(e.getMessage());
-		} finally {
-			this.cerrarResultSet(cRst);
-			this.cerrarStatement(cCom);
-			this.cerrarConexion(cCon);
-		}
-		return cReg;
-	}    
 	
 }
