@@ -5,19 +5,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DPedido {
 	private int pedCodigo;
 	private int proCodigo;
-	private int pedCantidad;
+	private String proNombre;
+	private String proUnivta;
+	private int pedCantidad;	
 	private double proPrecio;
 	private double pedParcial;
-			
+	
 	public DPedido() {
 		super();
 	}
-	
-	public DPedido(int pedCodigo, int proCodigo, int pedCantidad,
-			double proPrecio, double pedParcial) {
+		
+	public DPedido(int pedCodigo, int proCodigo, String proNombre,
+			String proUnivta, int pedCantidad, double proPrecio,
+			double pedParcial) {
 		super();
 		this.pedCodigo = pedCodigo;
 		this.proCodigo = proCodigo;
+		this.proNombre = proNombre;
+		this.proUnivta = proUnivta;
 		this.pedCantidad = pedCantidad;
 		this.proPrecio = proPrecio;
 		this.pedParcial = pedParcial;
@@ -34,6 +39,18 @@ public class DPedido {
 	}
 	public void setProCodigo(int proCodigo) {
 		this.proCodigo = proCodigo;
+	}
+	public String getProNombre() {
+		return proNombre;
+	}
+	public void setProNombre(String proNombre) {
+		this.proNombre = proNombre;
+	}
+	public String getProUnivta() {
+		return proUnivta;
+	}
+	public void setProUnivta(String proUnivta) {
+		this.proUnivta = proUnivta;
 	}
 	public int getPedCantidad() {
 		return pedCantidad;
@@ -53,7 +70,5 @@ public class DPedido {
 	public void setPedParcial(double pedParcial) {
 		this.pedParcial = pedParcial;
 	}
-	
-	
-
+			
 }

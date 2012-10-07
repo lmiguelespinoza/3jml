@@ -3,6 +3,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import pe.j3ml.app.excepcion.*;
 import pe.j3ml.app.util.*;
 import pe.j3ml.app.model.*;
@@ -77,4 +80,43 @@ public class pedidoDAO extends baseDAO {
 		}
     }	
     
+	public Collection<CPedido> listar() throws DAOExcepcion {
+		Collection<CPedido> c = new ArrayList<CPedido>();
+		Connection cCon=null;
+		PreparedStatement cCom=null;
+		ResultSet cRst=null;
+		try {
+			cCon = ConexionBD.obtenerConexion();
+			String cSql="Select a.PedCodigo,a.CliRUC,a.CliRazonSocial,a.CliDireccion,a.CliDistrito,a.PedFecReg,a.PedFecAte,a.PedTotal,a.PedEstado,b.ProCodigo,c.ProNombre,c.ProUniVta,b.PedCantidad,b.ProPrecio,b.PedParcial From 3JML.MCPedido a Inner Join 3JML.MDPedido b On (a.PedCodigo=b.PedCodigo) Inner Join 3JML.MProducto c On (b.ProCodigo=c.ProCodigo)";
+			cCom=cCon.prepareStatement(cSql);
+			cRst=cCom.executeQuery();
+			while (cRst.next()) {
+				CPedido cReg = new CPedido();
+				cReg.setPedCodigo(cRst.getInt("PedCodigo"));
+				cReg.setCliRUC(cRst.getString("CliRUC"));
+				cReg.setCliRazonSocial(cRst.getString("CliRazonSocial"));
+                cReg.setCliDireccion(cRst.getString("CliDireccion"));
+                cReg.setCliDistrito(cRst.getString("CliDistrito"));
+                cReg.setPedFecReg(cRst.getString("PedFecReg"));
+                cReg.setPedFecAte(cRst.getString("PedFecAte"));
+                cReg.setPedTotal(cRst.getDouble("PedTotal"));
+                cReg.setPedEstado(cRst.getString("PedEstado"));            	
+				c.add(cReg);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(cRst);
+			this.cerrarStatement(cCom);
+			this.cerrarConexion(cCon);
+		}
+		return c;
+	}    
+
+	public CPedido obtener(int pPedCodigo) throws DAOExcepcion {
+		CPedido cReg = new CPedido();	
+		return cReg;
+	}
+	
 }

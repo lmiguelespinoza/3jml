@@ -7,18 +7,24 @@ public class Producto {
 	private String proUnivta;
 	private double proPrecio;
 	private double proStock;
-	
+	private double prmCantid;
+	private double prmPrecio;
+		
 	public Producto() {
 		super();
 	}
-	
-	public Producto(String proNombre, String proUnivta,
-			double proPrecio, double proStock) {
+		
+	public Producto(int proCodigo, String proNombre, String proUnivta,
+			double proPrecio, double proStock, double prmCantid,
+			double prmPrecio) {
 		super();
+		this.proCodigo = proCodigo;
 		this.proNombre = proNombre;
 		this.proUnivta = proUnivta;
 		this.proPrecio = proPrecio;
 		this.proStock = proStock;
+		this.prmCantid = prmCantid;
+		this.prmPrecio = prmPrecio;
 	}
 
 	public int getProCodigo() {
@@ -50,6 +56,18 @@ public class Producto {
 	}
 	public void setProStock(double proStock) {
 		this.proStock = proStock;
+	}
+	public double getPrmCantid() {
+		return prmCantid;
+	}
+	public void setPrmCantid(double prmCantid) {
+		this.prmCantid = prmCantid;
+	}
+	public double getPrmPrecio() {
+		return prmPrecio;
+	}
+	public void setPrmPrecio(double prmPrecio) {
+		this.prmPrecio = prmPrecio;
 	}
 			
 }

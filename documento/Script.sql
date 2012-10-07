@@ -81,6 +81,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `3JML`.`MDPedido` (
   `PedCodigo`   INT DEFAULT 0,
   `ProCodigo`   INT DEFAULT 0,
+  `ProNombre`   VARCHAR(45) DEFAULT '',
+  `ProUnivta`   VARCHAR(15) DEFAULT '',
   `PedCantidad` INT DEFAULT 0,  
   `ProPrecio`   DECIMAL(6,2) DEFAULT 0,
   `PedParcial`  DECIMAL(10,2) DEFAULT 0,
