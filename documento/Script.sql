@@ -63,7 +63,8 @@ ENGINE = InnoDB;
 -- Table `3JML`.`MCPedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `3JML`.`MCPedido` (
-  `PedCodigo`      INT         NOT NULL AUTO_INCREMENT,
+  `PedCodigo`      INT           DEFAULT 0,
+  `UsuNombre`      VARCHAR(60)   DEFAULT '',
   `CliRUC`         VARCHAR(15)   DEFAULT '' ,
   `CliRazonSocial` VARCHAR(60)   DEFAULT '' ,
   `CliDireccion`   VARCHAR(60)   DEFAULT '' ,
@@ -79,16 +80,19 @@ ENGINE = InnoDB;
 -- Table `3JML`.`MDPedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `3JML`.`MDPedido` (
-  `PedCodigo`   INT DEFAULT 0,
-  `ProCodigo`   INT DEFAULT 0,
-  `ProNombre`   VARCHAR(45) DEFAULT '',
-  `ProUnivta`   VARCHAR(15) DEFAULT '',
-  `PedCantidad` INT DEFAULT 0,  
-  `ProPrecio`   DECIMAL(6,2) DEFAULT 0,
+  `PedCodigo`   INT           DEFAULT 0,
+  `ProCodigo`   INT           DEFAULT 0,
+  `ProNombre`   VARCHAR(45)   DEFAULT '',
+  `ProUnivta`   VARCHAR(15)   DEFAULT '',
+  `PedCantidad` INT           DEFAULT 0,  
+  `ProPrecio`   DECIMAL(6,2)  DEFAULT 0,
   `PedParcial`  DECIMAL(10,2) DEFAULT 0,
   PRIMARY KEY (`PedCodigo`,`ProCodigo`) )
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `3JML`.`MKardex`
+-- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `3JML`.`MKardex` (
   `ProCodigo` INT NOT NULL ,
   `KrdCantidadReal` DECIMAL(6,2) DEFAULT 0,

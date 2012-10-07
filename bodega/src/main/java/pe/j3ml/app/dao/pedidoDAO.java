@@ -11,7 +11,32 @@ import pe.j3ml.app.util.*;
 import pe.j3ml.app.model.*;
 
 public class pedidoDAO extends baseDAO {
-    public void insertar(CPedido vo) throws DAOExcepcion {
+	
+	public int numeroPedido() throws DAOExcepcion {
+		int c = 0;
+		Connection cCon=null;
+		PreparedStatement cCom=null;
+		ResultSet cRst=null;
+		try {
+			cCon = ConexionBD.obtenerConexion();
+			String cSql="Select Max(PedCodigo)+1 PedCodigo From 3JML.MCPedido ";
+			cCom=cCon.prepareStatement(cSql);
+			cRst=cCom.executeQuery();
+			while (cRst.next()) {
+				c=cRst.getInt("PedCodigo");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(cRst);
+			this.cerrarStatement(cCom);
+			this.cerrarConexion(cCon);
+		}
+		return c;
+	} 
+	
+    public void insertarCPedido(CPedido vo) throws DAOExcepcion {
         Connection con = null;
         PreparedStatement stmt = null;
         try {
@@ -20,57 +45,74 @@ public class pedidoDAO extends baseDAO {
             con = ConexionBD.obtenerConexion();           
             String qCliente= "SELECT CliRazonSocial,CliDireccion,CliDistrito FROM MCliente WHERE CliRUC=?";
             stmt = con.prepareStatement(qCliente);
-            stmt.setString(1, vo.getCliRUC());            
+            stmt.setString(1, vo.getCliRUC());
             ResultSet rstCliente;
             rstCliente = stmt.executeQuery();            
-            if (rstCliente != null && rstCliente.next() )
-            {
+            if (rstCliente != null && rstCliente.next() ) {
             	cCli.setRazonSocial(rstCliente.getString("CliRazonSocial"));
             	cCli.setDireccion(rstCliente.getString("CliDireccion"));
             	cCli.setDistrito(rstCliente.getString("CliDistrito"));
-            } else {            	
+               } else {            	
                 throw new DAOExcepcion("CLIENTE NO CREADO");
             }        	        	        	
         	con = ConexionBD.obtenerConexion();
-        	String query = "INSERT INTO MCPedido(CliRuc,CliRazonSocial,CliDireccion,CliDistrito,PedFecReg,PedFecAte,PedTotal,PedEstado) VALUES (?,?,?,?,?,?,?,?)";
+        	String query = "INSERT INTO MCPedido(PedCodigo,UsuNombre,CliRuc,CliRazonSocial,CliDireccion,CliDistrito,PedFecReg,PedFecAte,PedTotal,PedEstado) VALUES (?,?,?,?,?,?,?,?,?,?)";
         	stmt = con.prepareStatement(query);
-            stmt.setString(1, vo.getCliRUC());
-            stmt.setString(2, cCli.getRazonSocial());
-            stmt.setString(3, cCli.getDireccion());
-            stmt.setString(4, cCli.getDistrito());
-            stmt.setString(5, vo.getPedFecReg());
-            stmt.setString(6, "");
-            stmt.setDouble(7, vo.getPedTotal());
-            stmt.setString(8, "N");
+            stmt.setInt(1, vo.getPedCodigo());
+            stmt.setString(2, vo.getUsuNombre());
+            stmt.setString(3, vo.getCliRUC());
+            stmt.setString(4, cCli.getRazonSocial());
+            stmt.setString(5, cCli.getDireccion());
+            stmt.setString(6, cCli.getDistrito());
+            stmt.setString(7, vo.getPedFecReg());
+            stmt.setString(8, "");
+            stmt.setDouble(9, vo.getPedTotal());
+            stmt.setString(10, "N");
+            int i = stmt.executeUpdate();
+            if (i != 1) {
+                throw new SQLException("Error insertando registro. Consulte DBA!");
+             }
+        }catch (SQLException e) {
+               System.err.println(e.getMessage());
+              throw new DAOExcepcion(e.getMessage());
+		} finally {
+	    	this.cerrarStatement(stmt);
+	    	this.cerrarConexion(con);
+		}
+    }	
+    
+    public void insertarDPedido(DPedido vo) throws DAOExcepcion {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+        	Producto cPro = new Producto();    
+        	cPro.setProCodigo(vo.getProCodigo());
+            con = ConexionBD.obtenerConexion();           
+            String qProducto= "SELECT ProNombre,ProUnivta FROM MProducto WHERE ProCodigo=?";
+            stmt = con.prepareStatement(qProducto);
+            stmt.setInt(1, vo.getProCodigo());            
+            ResultSet rstProducto;
+            rstProducto = stmt.executeQuery();            
+            if (rstProducto != null && rstProducto.next()) {
+            	cPro.setProNombre(rstProducto.getString("ProNombre"));
+            	cPro.setProUnivta(rstProducto.getString("ProUnivta"));
+            } else {            	
+                throw new DAOExcepcion("PRODUCTO NO CREADO");
+            }        	        	        	
+        	con = ConexionBD.obtenerConexion();
+        	String query = "INSERT INTO MDPedido(PedCodigo,ProCodigo,ProNombre,ProUnivta,PedCantidad,ProPrecio,PedParcial) VALUES (?,?,?,?,?,?,?)";
+        	stmt = con.prepareStatement(query);
+            stmt.setInt(1, vo.getPedCodigo());
+            stmt.setInt(2, vo.getProCodigo());
+            stmt.setString(3, cPro.getProNombre());
+            stmt.setString(4, cPro.getProUnivta());
+            stmt.setDouble(5, vo.getPedCantidad());
+            stmt.setDouble(6, vo.getProPrecio());
+            stmt.setDouble(7, vo.getPedParcial());
             int i = stmt.executeUpdate();
             if (i != 1) {
                 throw new SQLException("Error insertando registro. Consulte DBA!");
             }            
-            con = ConexionBD.obtenerConexion();
-            String query2 = "SELECT PedCodigo FROM MCPedido WHERE PedEstado='N' And CliRUC=?";
-            stmt = con.prepareStatement(query2);            
-            stmt.setString(1, cCli.getRuc());
-            ResultSet rs;
-            rs = stmt.executeQuery();
-            if (rs != null && rs.next() )
-            {
-            	CPedido cReg = new CPedido();
-            	cReg.setPedCodigo(rs.getInt("PedCodigo"));
-            	String query3 = "INSERT INTO MDPedido(PedCodigo,ProCodigo,PedCantidad,ProPrecio,PedParcial) VALUES (?,?,?,?,?)";            	            	
-                stmt = con.prepareStatement(query3);
-                stmt.setInt(1, cReg.getPedCodigo());
-                stmt.setInt(2, vo.getDpedido().getProCodigo());
-                stmt.setInt(3, vo.getDpedido().getPedCantidad());
-                stmt.setDouble(4, vo.getDpedido().getProPrecio());
-                stmt.setDouble(5, vo.getDpedido().getPedParcial());
-                int ii = stmt.executeUpdate();
-                if (ii != 1) {
-                    throw new SQLException("Error insertando registro. Consulte DBA!");
-                }            	
-            } else {
-                System.out.println("PEDIDO NO CREADO");
-                throw new DAOExcepcion("PEDIDO NO CREADO");
-            }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             throw new DAOExcepcion(e.getMessage());
@@ -78,21 +120,22 @@ public class pedidoDAO extends baseDAO {
 	    	this.cerrarStatement(stmt);
 	    	this.cerrarConexion(con);
 		}
-    }	
+    }
     
-	public Collection<CPedido> listar() throws DAOExcepcion {
-		Collection<CPedido> c = new ArrayList<CPedido>();
+	public Collection<TPedido> listar() throws DAOExcepcion {
+		Collection<TPedido> c = new ArrayList<TPedido>();
 		Connection cCon=null;
 		PreparedStatement cCom=null;
 		ResultSet cRst=null;
 		try {
 			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select a.PedCodigo,a.CliRUC,a.CliRazonSocial,a.CliDireccion,a.CliDistrito,a.PedFecReg,a.PedFecAte,a.PedTotal,a.PedEstado,b.ProCodigo,c.ProNombre,c.ProUniVta,b.PedCantidad,b.ProPrecio,b.PedParcial From 3JML.MCPedido a Inner Join 3JML.MDPedido b On (a.PedCodigo=b.PedCodigo) Inner Join 3JML.MProducto c On (b.ProCodigo=c.ProCodigo)";
+			String cSql="Select a.PedCodigo,a.UsuNombre,a.CliRUC,a.CliRazonSocial,a.CliDireccion,a.CliDistrito,a.PedFecReg,a.PedFecAte,a.PedTotal,a.PedEstado,b.ProCodigo,b.ProNombre,b.ProUniVta,b.PedCantidad,b.ProPrecio,b.PedParcial From 3JML.MCPedido a Inner Join 3JML.MDPedido b On (a.PedCodigo=b.PedCodigo) ";
 			cCom=cCon.prepareStatement(cSql);
 			cRst=cCom.executeQuery();
 			while (cRst.next()) {
-				CPedido cReg = new CPedido();
+				TPedido cReg = new TPedido();
 				cReg.setPedCodigo(cRst.getInt("PedCodigo"));
+				cReg.setUsuNombre(cRst.getString("UsuNombre"));
 				cReg.setCliRUC(cRst.getString("CliRUC"));
 				cReg.setCliRazonSocial(cRst.getString("CliRazonSocial"));
                 cReg.setCliDireccion(cRst.getString("CliDireccion"));
@@ -100,7 +143,13 @@ public class pedidoDAO extends baseDAO {
                 cReg.setPedFecReg(cRst.getString("PedFecReg"));
                 cReg.setPedFecAte(cRst.getString("PedFecAte"));
                 cReg.setPedTotal(cRst.getDouble("PedTotal"));
-                cReg.setPedEstado(cRst.getString("PedEstado"));            	
+                cReg.setPedEstado(cRst.getString("PedEstado"));
+				cReg.setProCodigo(cRst.getInt("ProCodigo"));
+                cReg.setProNombre(cRst.getString("ProNombre"));		                
+                cReg.setProUnivta(cRst.getString("ProUnivta"));
+                cReg.setPedCantidad(cRst.getInt("PedCantidad"));
+                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
+                cReg.setPedParcial(cRst.getDouble("PedParcial"));                          	            	
 				c.add(cReg);
 			}
 		} catch (SQLException e) {
@@ -112,11 +161,48 @@ public class pedidoDAO extends baseDAO {
 			this.cerrarConexion(cCon);
 		}
 		return c;
-	}    
-
-	public CPedido obtener(int pPedCodigo) throws DAOExcepcion {
-		CPedido cReg = new CPedido();	
-		return cReg;
-	}
+	} 
 	
+	public Collection<TPedido> obtener(int pPedCodigo) throws DAOExcepcion {
+		Collection<TPedido> c = new ArrayList<TPedido>();
+		Connection cCon=null;
+		PreparedStatement cCom=null;
+		ResultSet cRst=null;
+		try {
+			cCon = ConexionBD.obtenerConexion();
+			String cSql="Select a.PedCodigo,a.UsuNombre,a.CliRUC,a.CliRazonSocial,a.CliDireccion,a.CliDistrito,a.PedFecReg,a.PedFecAte,a.PedTotal,a.PedEstado,b.ProCodigo,b.ProNombre,b.ProUniVta,b.PedCantidad,b.ProPrecio,b.PedParcial From 3JML.MCPedido a Inner Join 3JML.MDPedido b On (a.PedCodigo=b.PedCodigo)  Where a.PedCodigo=?";
+			cCom=cCon.prepareStatement(cSql);
+			cCom.setInt(1, pPedCodigo);			
+			cRst=cCom.executeQuery();
+			while (cRst.next()) {
+				TPedido cReg = new TPedido();
+				cReg.setPedCodigo(cRst.getInt("PedCodigo"));
+				cReg.setUsuNombre(cRst.getString("UsuNombre"));
+				cReg.setCliRUC(cRst.getString("CliRUC"));
+				cReg.setCliRazonSocial(cRst.getString("CliRazonSocial"));
+                cReg.setCliDireccion(cRst.getString("CliDireccion"));
+                cReg.setCliDistrito(cRst.getString("CliDistrito"));
+                cReg.setPedFecReg(cRst.getString("PedFecReg"));
+                cReg.setPedFecAte(cRst.getString("PedFecAte"));
+                cReg.setPedTotal(cRst.getDouble("PedTotal"));
+                cReg.setPedEstado(cRst.getString("PedEstado"));
+				cReg.setProCodigo(cRst.getInt("ProCodigo"));
+                cReg.setProNombre(cRst.getString("ProNombre"));		                
+                cReg.setProUnivta(cRst.getString("ProUnivta"));
+                cReg.setPedCantidad(cRst.getInt("PedCantidad"));
+                cReg.setProPrecio(cRst.getDouble("ProPrecio"));
+                cReg.setPedParcial(cRst.getDouble("PedParcial"));                          	            	
+				c.add(cReg);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			throw new DAOExcepcion(e.getMessage());
+		} finally {
+			this.cerrarResultSet(cRst);
+			this.cerrarStatement(cCom);
+			this.cerrarConexion(cCon);
+		}
+		return c;
+	}  
+
 }

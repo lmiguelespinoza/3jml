@@ -14,11 +14,15 @@
 </form>
 <br />
 <br />
-<br />
 <h2>Consulta</h2>
 <form action="rs/producto-service/codigo/" method="GET">
 	<label for="bproducto">Código </label> <input name="pProCodigo" /> <br />
 	<input type="submit" value="Filtrar" />
 </form>
+<br />
+<br />
+<h2>Productos</h2>
+<a href="rs/producto-service/productos">Obtener productos</a>
+<br />	
 </body>
 </html>

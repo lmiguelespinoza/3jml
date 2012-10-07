@@ -2,10 +2,10 @@ package pe.j3ml.app.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "cpedido")
+@XmlRootElement(name = "tpedido")
 
-public class CPedido {
-	private int pedCodigo;
+public class TPedido {
+	private int    pedCodigo;
 	private String usuNombre;
 	private String cliRUC;
 	private String cliRazonSocial;
@@ -15,15 +15,23 @@ public class CPedido {
 	private String pedFecAte;
 	private double pedTotal;
 	private String pedEstado;
+	private int    proCodigo;
+	private String proNombre;
+	private String proUnivta;
+	private int    pedCantidad;	
+	private double proPrecio;
+	private double pedParcial;
 	
-	public CPedido() {
+	public TPedido() {
 		super();
 	}
 	
-	public CPedido(int pedCodigo, String usuNombre, String cliRUC,
+	public TPedido(int pedCodigo, String usuNombre, String cliRUC,
 			String cliRazonSocial, String cliDireccion, String cliDistrito,
 			String pedFecReg, String pedFecAte, double pedTotal,
-			String pedEstado) {
+			String pedEstado, int proCodigo, String proNombre,
+			String proUnivta, int pedCantidad, double proPrecio,
+			double pedParcial) {
 		super();
 		this.pedCodigo = pedCodigo;
 		this.usuNombre = usuNombre;
@@ -35,6 +43,12 @@ public class CPedido {
 		this.pedFecAte = pedFecAte;
 		this.pedTotal = pedTotal;
 		this.pedEstado = pedEstado;
+		this.proCodigo = proCodigo;
+		this.proNombre = proNombre;
+		this.proUnivta = proUnivta;
+		this.pedCantidad = pedCantidad;
+		this.proPrecio = proPrecio;
+		this.pedParcial = pedParcial;
 	}
 
 	public int getPedCodigo() {
@@ -96,6 +110,42 @@ public class CPedido {
 	}
 	public void setPedEstado(String pedEstado) {
 		this.pedEstado = pedEstado;
+	}
+	public int getProCodigo() {
+		return proCodigo;
+	}
+	public void setProCodigo(int proCodigo) {
+		this.proCodigo = proCodigo;
+	}
+	public String getProNombre() {
+		return proNombre;
+	}
+	public void setProNombre(String proNombre) {
+		this.proNombre = proNombre;
+	}
+	public String getProUnivta() {
+		return proUnivta;
+	}
+	public void setProUnivta(String proUnivta) {
+		this.proUnivta = proUnivta;
+	}
+	public int getPedCantidad() {
+		return pedCantidad;
+	}
+	public void setPedCantidad(int pedCantidad) {
+		this.pedCantidad = pedCantidad;
+	}
+	public double getProPrecio() {
+		return proPrecio;
+	}
+	public void setProPrecio(double proPrecio) {
+		this.proPrecio = proPrecio;
+	}
+	public double getPedParcial() {
+		return pedParcial;
+	}
+	public void setPedParcial(double pedParcial) {
+		this.pedParcial = pedParcial;
 	}
 	
 }

@@ -29,7 +29,6 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public ProductoCollection getProductos(){
-		// TODO Auto-generated method stub
 		ProductoNegocio neg = new ProductoNegocio();
 		productos.clear();		
 		try {
@@ -61,31 +60,13 @@ public class ProductoServiceImpl implements ProductoService {
         return productos.get(pProCodigo);
     }		
 	
-/*	
-    @Override
-    public Producto getProducto(int pProCodigo){
-		ProductoNegocio neg = new ProductoNegocio();	
-		Producto pro = new Producto();
-		try {
-			pro=neg.obtenerProducto(pProCodigo);
-			System.out.println("producto:");
-			System.out.println(pro.getProNombre());
-			fProducto.put("1", pro);
-		} catch (DAOExcepcion e) {
-			e.printStackTrace();
-		}    	
-        return fProducto.get("1");
-    }
-*/	
 	@Override
 	public void nuevoProducto (String pNombre, String pUnivta, double pPrecio, double pStock,
 			String urlReturn, HttpServletResponse servletResponse) throws IOException {		
-		// TODO Auto-generated method stub
 		ProductoNegocio neg = new ProductoNegocio();	
 		try {
 			neg.insertarProducto(0, pNombre, pUnivta, pPrecio, pStock);
 		} catch (DAOExcepcion e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		URI uri = uriInfo.getAbsolutePathBuilder().path(pNombre.toString()).build();

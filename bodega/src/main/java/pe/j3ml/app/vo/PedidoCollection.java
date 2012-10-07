@@ -11,18 +11,18 @@ import pe.j3ml.app.model.*;
 @XmlRootElement(name = "response")
 
 public class PedidoCollection {
-    private Collection<CPedido> pedidos;
+    private Collection<TPedido> pedidos;
     
     public PedidoCollection() {
     }
 
-    public PedidoCollection(Collection<CPedido> pedidos) {
+    public PedidoCollection(Collection<TPedido> pedidos) {
         this.pedidos = pedidos;
     }
 
     @XmlElement(name="pedido")
     @XmlElementWrapper(name="pedidos")
-    public Collection<CPedido> getPedidos() {
+    public Collection<TPedido> getPedidos() {
         return pedidos;
     }
 }

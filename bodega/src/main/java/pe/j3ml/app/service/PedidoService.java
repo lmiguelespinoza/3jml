@@ -11,7 +11,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import pe.j3ml.app.model.CPedido;
 import pe.j3ml.app.vo.PedidoCollection;
 
 @Path("/pedido-service/")
@@ -27,22 +26,39 @@ public interface PedidoService {
     @Path("/pedido")
     @Produces({"application/xml", "application/json"})
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public CPedido getPedido(@FormParam("pPedCodigo") String pPedCodigo);
-    
+    public PedidoCollection getPedido(@FormParam("pPedCodigo") int pPedCodigo);
+
+    @GET
+    @Path("/newN")
+    @Produces({"application/xml", "application/json"})
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public int getNumeroPedido();
+
     @POST
-    @Path("/new")
+    @Path("/newC")
 	@Produces(MediaType.TEXT_HTML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    
-	public void nuevoPedido(
-			@FormParam("pCliRUC") String pCliRUC,
-			@FormParam("pPedFecReg") String pPedFecReg,
-			@FormParam("pPedTotal") double pPedTotal,
-			@FormParam("pProCodigo") int pProCodigo,
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)   
+	public void nuevoCPedido(			
+			@FormParam("pPedCodigo")   int pPedCodigo,
+			@FormParam("pUsuNombre")   String pUsuNombre,
+			@FormParam("pCliRUC")      String pCliRUC,
+			@FormParam("pPedFecReg")   String pPedFecReg,
+			@FormParam("pPedTotal")    double pPedTotal,
+			@FormParam("urlReturn")    String urlReturn,	
+			@Context HttpServletResponse servletResponse
+	) throws IOException;
+
+    @POST
+    @Path("/newD")
+	@Produces(MediaType.TEXT_HTML)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)    
+	public void nuevoDPedido(
+			@FormParam("pPedCodigo")   int pPedCodigo,		
+			@FormParam("pProCodigo")   int pProCodigo,
 			@FormParam("pPedCantidad") int pPedCantidad,
-			@FormParam("pProPrecio") double pProPrecio,			
-			@FormParam("pPedParcial") double pPedParcial,						
-			@FormParam("urlReturn") String urlReturn,	
+			@FormParam("pProPrecio")   double pProPrecio,			
+			@FormParam("pPedParcial")  double pPedParcial,						
+			@FormParam("urlReturn")    String urlReturn,	
 			@Context HttpServletResponse servletResponse
 	) throws IOException;
     

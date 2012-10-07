@@ -27,27 +27,73 @@ public class PedidoServiceImpl implements PedidoService {
 
 	public PedidoServiceImpl() {}
 	
-    private static Map<String, CPedido> pedidos = new HashMap<String, CPedido>();
+    private static Map<String, TPedido> pedidos = new HashMap<String, TPedido>();
 
 	@Override
 	public PedidoCollection getPedidos(){
-		// TODO Auto-generated method stub
 		PedidoNegocio neg = new PedidoNegocio();
 		pedidos.clear();		
-	    			
-		return new PedidoCollection(pedidos.values()); 
+		try {
+			Collection<TPedido> lista = neg.listar();
+			String cPro="";
+			for (TPedido pro:lista){
+				cPro=Integer.toString(pro.getPedCodigo())+Integer.toString(pro.getProCodigo());
+				pedidos.put(cPro, new TPedido(pro.getPedCodigo(),pro.getUsuNombre(),pro.getCliRUC(),pro.getCliRazonSocial(),pro.getCliDireccion(),pro.getCliDistrito(),pro.getPedFecReg(),pro.getPedFecAte(),pro.getPedTotal(),pro.getPedEstado(),pro.getProCodigo(),pro.getProNombre(),pro.getProUnivta(),pro.getPedCantidad(),pro.getProPrecio(),pro.getPedParcial()));								
+				}
+			}  catch (DAOExcepcion e) {
+			e.printStackTrace();
+		}    	    			
+		return new PedidoCollection(pedidos.values()); 		
+	}
+
+	@Override
+	public PedidoCollection getPedido(int pPedCodigo){
+		PedidoNegocio neg = new PedidoNegocio();
+		pedidos.clear();		
+		try {
+			Collection<TPedido> lista = neg.obtenerPedido(pPedCodigo);
+			String cPro="";
+			for (TPedido pro:lista){
+				cPro=Integer.toString(pro.getPedCodigo())+Integer.toString(pro.getProCodigo());
+				pedidos.put(cPro, new TPedido(pro.getPedCodigo(),pro.getUsuNombre(),pro.getCliRUC(),pro.getCliRazonSocial(),pro.getCliDireccion(),pro.getCliDistrito(),pro.getPedFecReg(),pro.getPedFecAte(),pro.getPedTotal(),pro.getPedEstado(),pro.getProCodigo(),pro.getProNombre(),pro.getProUnivta(),pro.getPedCantidad(),pro.getProPrecio(),pro.getPedParcial()));								
+				}
+			}  catch (DAOExcepcion e) {
+			e.printStackTrace();
+		}    	    			
+		return new PedidoCollection(pedidos.values()); 		
 	}
 
     @Override
-    public CPedido getPedido(String pPedCodigo){
-  	    	
-        return pedidos.get(pPedCodigo);
-    }		
-    
+    public int getNumeroPedido() {
+    	PedidoNegocio neg = new PedidoNegocio();
+    	int nPedido = 0;
+    	try {
+    		nPedido=neg.numeroPedido();
+    		} catch (DAOExcepcion e) {
+			e.printStackTrace();
+    		}
+        return nPedido;
+    }		  
 	   
 	@Override
-	public void nuevoPedido(String pCliRUC, String pPedFecReg, double pPedTotal, int pProCodigo,
-			int pPedCantidad, double pProPrecio, double pPedParcial, 
+	public void nuevoCPedido(int pPedCodigo, String pUsuNombre, String pCliRUC, String pPedFecReg, double pPedTotal, 
+			String urlReturn, HttpServletResponse servletResponse) throws IOException {
+		// TODO Auto-generated method stub
+		PedidoNegocio neg = new PedidoNegocio();
+		try {
+			neg.insertarCPedido(pPedCodigo, pUsuNombre, pCliRUC, pPedFecReg,  pPedTotal);
+		} catch (DAOExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		URI uri = uriInfo.getAbsolutePathBuilder().path(pCliRUC.toString()).build();	
+		Response.created(uri).build();		
+		//servletResponse.sendRedirect(urlReturn);		
+		servletResponse.sendRedirect("../../pedido.jsp");		
+	}
+
+	@Override
+	public void nuevoDPedido(int pPedCodigo, int pProCodigo,int pPedCantidad, double pProPrecio, double pPedParcial, 
 			String urlReturn, HttpServletResponse servletResponse) throws IOException {
 		// TODO Auto-generated method stub
 		PedidoNegocio neg = new PedidoNegocio();
@@ -57,13 +103,11 @@ public class PedidoServiceImpl implements PedidoService {
 		det.setProPrecio(pProPrecio);
 		det.setPedParcial(pPedParcial);
 		try {
-			neg.insertarPedido(pCliRUC, pPedFecReg,  pPedTotal, det);
+			neg.insertarDPedido(pPedCodigo, pProCodigo, pPedCantidad, pProPrecio, pPedParcial);
 		} catch (DAOExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		URI uri = uriInfo.getAbsolutePathBuilder().path(pCliRUC.toString()).build();	
-		Response.created(uri).build();		
 		//servletResponse.sendRedirect(urlReturn);		
 		servletResponse.sendRedirect("../../pedido.jsp");		
 	}
