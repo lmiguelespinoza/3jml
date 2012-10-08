@@ -59,6 +59,8 @@ CREATE  TABLE IF NOT EXISTS `3JML`.`MPromociones` (
    PRIMARY KEY (`PrmCodigo`) )
 ENGINE = InnoDB;
 
+
+
 -- -----------------------------------------------------
 -- Table `3JML`.`MCPedido`
 -- -----------------------------------------------------
