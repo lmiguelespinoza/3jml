@@ -44,4 +44,16 @@
     </jaxrs:server>
     <bean id="pedidoServiceImpl" class="pe.j3ml.app.service.impl.PedidoServiceImpl" />
 
+	
+	<jaxrs:server id="promocionService" address="/">
+			<jaxrs:serviceBeans>
+			<ref bean="promocionServiceImpl" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="xml" value="application/xml" />
+			<entry key="json" value="application/json" />
+		</jaxrs:extensionMappings>
+	</jaxrs:server>
+	<bean id="promocionServiceImpl" class="pe.j3ml.app.service.impl.PromocionServiceImpl" />
+
 </beans>
