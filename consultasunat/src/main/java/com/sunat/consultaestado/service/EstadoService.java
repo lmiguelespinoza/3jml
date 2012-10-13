@@ -13,7 +13,7 @@ public interface EstadoService {
 	@WebResult(name = "estado")
 	public String consultaRuc(@WebParam(name = "nRuc") String nRuc);
 
-	@WebResult(name="persona")
+	@WebResult(name = "persona")
     PersonaJuridica consultarRuc(@WebParam(name="nRuc") String nRuc);
 	
 }
