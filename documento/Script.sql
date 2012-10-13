@@ -4,6 +4,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 CREATE SCHEMA IF NOT EXISTS `3JML` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `3JML` ;
+
 -- -----------------------------------------------------
 -- Table `3JML`.`MUsuario`
 -- -----------------------------------------------------
