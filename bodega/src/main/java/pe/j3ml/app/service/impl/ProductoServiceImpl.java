@@ -36,7 +36,7 @@ public class ProductoServiceImpl implements ProductoService {
 			String cPro="";
 			for (Producto pro:lista){
 				cPro=Integer.toString(pro.getProCodigo());
-				productos.put(cPro, new Producto(pro.getProCodigo(), pro.getProNombre(), pro.getProUnivta(), pro.getProStock(), pro.getProPrecio(), pro.getPrmCantid(), pro.getPrmPrecio()) );
+				productos.put(cPro, pro);
 				}
 			}  catch (DAOExcepcion e) {
 			e.printStackTrace();
@@ -53,7 +53,7 @@ public class ProductoServiceImpl implements ProductoService {
 			fPro=Integer.parseInt(pProCodigo);
 			pro=neg.obtenerProducto(fPro);
 			productos.clear();
-			productos.put(pProCodigo, new Producto(pro.getProCodigo(), pro.getProNombre(), pro.getProUnivta(), pro.getProStock(), pro.getProPrecio(), pro.getPrmCantid(), pro.getPrmPrecio()) );
+			productos.put(pProCodigo, pro);
 		} catch (DAOExcepcion e) {
 			e.printStackTrace();
 		}    	    	

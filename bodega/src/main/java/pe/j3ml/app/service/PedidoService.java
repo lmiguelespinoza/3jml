@@ -17,6 +17,7 @@ import pe.j3ml.app.vo.PedidoCollection;
 @Produces("application/xml")
 
 public interface PedidoService {
+	
     @GET
     @Path("/pedidos")
     @Produces({"application/xml", "application/json"})
@@ -29,13 +30,12 @@ public interface PedidoService {
     public PedidoCollection getPedido(@FormParam("pPedCodigo") int pPedCodigo);
 
     @GET
-    @Path("/newN")
+    @Path("/getId")
     @Produces({"application/xml", "application/json"})
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public int getNumeroPedido();
 
     @POST
-    @Path("/newC")
+    @Path("/new")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)   
 	public void nuevoCPedido(			
@@ -49,7 +49,7 @@ public interface PedidoService {
 	) throws IOException;
 
     @POST
-    @Path("/newD")
+    @Path("/newDet")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)    
 	public void nuevoDPedido(

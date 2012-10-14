@@ -7,13 +7,13 @@
 
 <body>
 
-<form action="rs/pedido-service/newN" method="GET">
+<form action="rs/pedido-service/getId" method="GET">
     <h2>Nro.Pedido</h2>	
 	<input type="submit" value="Generar Nro. Pedido" />
 </form>
 <br />
 <br />
-<form action="rs/pedido-service/newC" method="POST">
+<form action="rs/pedido-service/new" method="POST">
     <h2>Cabecera</h2>
 	<label for="cpedido">Pedido  </label> <input name="pPedCodigo"   /> <br />
 	<label for="cpedido">Usuario </label> <input name="pUsuNombre"   /> <br />	
@@ -24,7 +24,7 @@
 </form>
 <br />
 <br />
-<form action="rs/pedido-service/newD" method="POST">
+<form action="rs/pedido-service/newDet" method="POST">
     <h2>Detalle</h2>
 	<label for="dpedido">Pedido  </label> <input name="pPedCodigo"   /> <br />
 	<label for="dpedido">Producto</label> <input name="pProCodigo"   /> <br />

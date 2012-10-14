@@ -19,11 +19,13 @@ public class pedidoDAO extends baseDAO {
 		ResultSet cRst=null;
 		try {
 			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select Max(PedCodigo)+1 PedCodigo From 3JML.MCPedido ";
+			String cSql="Select IfNull(Max(PedCodigo) + 1, 1) PedCodigo From 3JML.MCPedido";
 			cCom=cCon.prepareStatement(cSql);
 			cRst=cCom.executeQuery();
-			while (cRst.next()) {
-				c=cRst.getInt("PedCodigo");
+			if (cRst != null && cRst.next() ) {
+				c = cRst.getInt("PedCodigo");				
+			} else {
+				c = 1;
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -52,7 +54,7 @@ public class pedidoDAO extends baseDAO {
             	cCli.setRazonSocial(rstCliente.getString("CliRazonSocial"));
             	cCli.setDireccion(rstCliente.getString("CliDireccion"));
             	cCli.setDistrito(rstCliente.getString("CliDistrito"));
-               } else {            	
+            } else {            	
                 throw new DAOExcepcion("CLIENTE NO CREADO");
             }        	        	        	
         	con = ConexionBD.obtenerConexion();
@@ -65,7 +67,7 @@ public class pedidoDAO extends baseDAO {
             stmt.setString(5, cCli.getDireccion());
             stmt.setString(6, cCli.getDistrito());
             stmt.setString(7, vo.getPedFecReg());
-            stmt.setString(8, "");
+            stmt.setString(8, null);
             stmt.setDouble(9, vo.getPedTotal());
             stmt.setString(10, "N");
             int i = stmt.executeUpdate();

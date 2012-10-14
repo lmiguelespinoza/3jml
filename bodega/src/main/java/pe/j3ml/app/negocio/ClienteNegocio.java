@@ -1,8 +1,10 @@
 package pe.j3ml.app.negocio;
 
 import pe.j3ml.app.dao.clienteDAO;
+import pe.j3ml.app.dao.productoDAO;
 import pe.j3ml.app.excepcion.DAOExcepcion;
 import pe.j3ml.app.model.Cliente;
+import pe.j3ml.app.model.Producto;
 
 public class ClienteNegocio {
 	
@@ -23,6 +25,11 @@ public class ClienteNegocio {
 				throw new DAOExcepcion("ERROR INSERTAR CLIENTE");
 			}
 		}
+	}
+	
+	public Cliente obtenerCliente(String pRuc) throws DAOExcepcion {
+		clienteDAO dao = new clienteDAO();
+		return dao.obtenerCliente(pRuc);
 	}
 
 }
