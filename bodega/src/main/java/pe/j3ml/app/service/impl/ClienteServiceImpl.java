@@ -2,8 +2,8 @@ package pe.j3ml.app.service.impl;
 
 import java.io.IOException;
 import java.net.URI;
-//import java.util.HashMap;
-//import java.util.Map;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import pe.j3ml.app.service.*;
+import pe.j3ml.app.model.Cliente;
 import pe.j3ml.app.negocio.*;
 import pe.j3ml.app.excepcion.*;
 
@@ -21,6 +22,8 @@ public class ClienteServiceImpl implements ClienteService {
 	UriInfo uriInfo;
 	@Context
 	Request request;
+	
+	private static Map<String, Cliente> clientes = new HashMap<String, Cliente>();
 
 	@Override
 	public void nuevoCliente (String ruc, String razonSocial, String direccion, String distrito,
@@ -44,7 +47,19 @@ public class ClienteServiceImpl implements ClienteService {
 		
 	}
 
-
+	@Override
+    public Cliente getCliente(String ruc){
+    	ClienteNegocio neg = new ClienteNegocio();
+		Cliente objCliente = new Cliente();
+		try {			
+			objCliente = neg.obtenerCliente(ruc);
+			clientes.clear();			
+			clientes.put(ruc, objCliente);
+		} catch (DAOExcepcion e) {
+			e.printStackTrace();
+		}    	    	
+        return clientes.get(ruc);
+    }
     
 
 }

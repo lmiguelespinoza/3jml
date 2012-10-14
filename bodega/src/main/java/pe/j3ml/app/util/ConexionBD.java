@@ -10,7 +10,7 @@ public class ConexionBD {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:8080/3jml",
-						"root", "root");
+						"root", "");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

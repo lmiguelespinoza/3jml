@@ -12,6 +12,7 @@ public class Cliente {
     private String telefono;    
     private String correo;    
     private String contacto;
+    private String estado;
     
     public Cliente(String ruc, String razonSocial, String direccion,
 			String distrito, String telefono, String correo, String contacto) {
@@ -81,6 +82,14 @@ public class Cliente {
 
 	public void setContacto(String contacto) {
 		this.contacto = contacto;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 

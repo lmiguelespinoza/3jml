@@ -55,7 +55,7 @@ public class productoDAO extends baseDAO{
 		ResultSet cRst=null;
 		try {
 			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantid,0) PrmCantid,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromociones b On (a.ProCodigo=b.ProCodigo) Order By a.ProNombre";
+			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantidad,0) PrmCantidad,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromocion b On (a.ProCodigo=b.ProCodigo) Order By a.ProNombre";
 			cCom=cCon.prepareStatement(cSql);
 			cRst=cCom.executeQuery();
 			while (cRst.next()) {
@@ -65,7 +65,7 @@ public class productoDAO extends baseDAO{
 				cReg.setProUnivta(cRst.getString("ProUnivta"));
                 cReg.setProPrecio(cRst.getDouble("ProPrecio"));
                 cReg.setProStock(cRst.getDouble("ProStock"));
-                cReg.setPrmCantid(cRst.getDouble("PrmCantid"));
+                cReg.setPrmCantid(cRst.getDouble("PrmCantidad"));
                 cReg.setPrmPrecio(cRst.getDouble("PrmPrecio"));
 				c.add(cReg);
 			}
@@ -87,7 +87,7 @@ public class productoDAO extends baseDAO{
 		ResultSet cRst=null;
 		try {
 			cCon = ConexionBD.obtenerConexion();
-			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantid,0) PrmCantid,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromociones b On (a.ProCodigo=b.ProCodigo) Where a.ProCodigo=?";
+			String cSql="Select a.ProCodigo,a.ProNombre,a.ProUnivta,a.ProPrecio,a.ProStock,IfNull(b.PrmCantidad,0) PrmCantidad,IfNull(b.PrmPrecio,0) PrmPrecio From 3JML.MProducto a Left Join 3JML.MPromocion b On (a.ProCodigo=b.ProCodigo) Where a.ProCodigo=?";
 			cCom=cCon.prepareStatement(cSql);
 			cCom.setInt(1, pProCodigo);
 			cRst=cCom.executeQuery();			  						
@@ -97,7 +97,7 @@ public class productoDAO extends baseDAO{
 				cReg.setProUnivta(cRst.getString("ProUnivta"));
                 cReg.setProPrecio(cRst.getDouble("ProPrecio"));
                 cReg.setProStock(cRst.getDouble("ProStock"));
-                cReg.setPrmCantid(cRst.getDouble("PrmCantid"));
+                cReg.setPrmCantid(cRst.getDouble("PrmCantidad"));
                 cReg.setPrmPrecio(cRst.getDouble("PrmPrecio"));
 			}
 		} catch (SQLException e) {

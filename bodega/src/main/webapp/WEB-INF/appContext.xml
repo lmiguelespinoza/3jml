@@ -11,49 +11,21 @@
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
 
-    <jaxrs:server id="userService" address="/">
+    <jaxrs:server id="bodegaService" address="/">
         <jaxrs:serviceBeans>
-            <ref bean="userServiceImpl" />
-        </jaxrs:serviceBeans>
-        <jaxrs:extensionMappings>
-            <entry key="xml" value="application/xml" />
-            <entry key="json" value="application/json"  />
-        </jaxrs:extensionMappings>
-    </jaxrs:server>
-    <bean id="userServiceImpl" class="pe.j3ml.app.service.impl.ClienteServiceImpl" />
-
-    <jaxrs:server id="productoService" address="/">
-        <jaxrs:serviceBeans>
+            <ref bean="clienteServiceImpl" />
             <ref bean="productoServiceImpl" />
-        </jaxrs:serviceBeans>
-        <jaxrs:extensionMappings>
-            <entry key="xml" value="application/xml" />
-            <entry key="json" value="application/json"  />
-        </jaxrs:extensionMappings>
-    </jaxrs:server>
-    <bean id="productoServiceImpl" class="pe.j3ml.app.service.impl.ProductoServiceImpl" />
-
-    <jaxrs:server id="pedidoService" address="/">
-        <jaxrs:serviceBeans>
             <ref bean="pedidoServiceImpl" />
+            <ref bean="promocionServiceImpl" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="xml" value="application/xml" />
             <entry key="json" value="application/json"  />
         </jaxrs:extensionMappings>
     </jaxrs:server>
+    <bean id="clienteServiceImpl" class="pe.j3ml.app.service.impl.ClienteServiceImpl" />
+    <bean id="productoServiceImpl" class="pe.j3ml.app.service.impl.ProductoServiceImpl" />
     <bean id="pedidoServiceImpl" class="pe.j3ml.app.service.impl.PedidoServiceImpl" />
-
-	
-	<jaxrs:server id="promocionService" address="/">
-			<jaxrs:serviceBeans>
-			<ref bean="promocionServiceImpl" />
-		</jaxrs:serviceBeans>
-		<jaxrs:extensionMappings>
-			<entry key="xml" value="application/xml" />
-			<entry key="json" value="application/json" />
-		</jaxrs:extensionMappings>
-	</jaxrs:server>
 	<bean id="promocionServiceImpl" class="pe.j3ml.app.service.impl.PromocionServiceImpl" />
 
 </beans>

@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import pe.j3ml.app.model.*;
 
 @XmlRootElement(name = "response")
-
 public class ProductoCollection {
     private Collection<Producto> productos;
     
