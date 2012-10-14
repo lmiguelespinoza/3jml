@@ -23,7 +23,7 @@ public class PromocionServiceImpl implements PromocionService {
 	
 	@Override
 	public void nuevoPromocion(String nombre, String fecIni, String fecFin,
-			int codpro, double cantidad, double precio, String urlReturn,
+			int codPro, double cantidad, double precio, String urlReturn,
 			HttpServletResponse servletResponse) throws IOException {
 		// TODO Auto-generated method stub
 
@@ -32,7 +32,7 @@ public class PromocionServiceImpl implements PromocionService {
 PromocionNegocio neg = new PromocionNegocio();
 		
 		try {
-			neg.insertarPromocion(nombre, fecIni, fecFin, codpro, cantidad, precio);
+			neg.insertarPromocion(nombre, fecIni, fecFin, codPro, cantidad, precio);
 		} catch (DAOExcepcion e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

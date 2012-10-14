@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 //import pe.j3ml.app.model.*;
 
-@Path("/cliente-service/")
+@Path("/promocion-service/")
 @Produces("application/xml")
 
 public interface PromocionService {
@@ -27,12 +27,12 @@ public interface PromocionService {
 		@Produces(MediaType.TEXT_HTML)
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 		public void nuevoPromocion (
-				@FormParam("Promocion") String nombre,
-				@FormParam("FecInicio") String fecIni,
-				@FormParam("FecFin") String fecFin,
-				@FormParam("CodProducto") int codpro,
-				@FormParam("Cantidad") double cantidad,
-				@FormParam("precio") double precio,
+				@FormParam("pNombre") String nombre,
+				@FormParam("pFecIni") String fecIni,
+				@FormParam("pFecFin") String fecFin,
+				@FormParam("pProducto") int codPro,
+				@FormParam("pCantidad") double cantidad,
+				@FormParam("pPrecio") double precio,
 				@FormParam("urlReturn") String urlReturn,	
 				@Context HttpServletResponse servletResponse
 		) throws IOException;

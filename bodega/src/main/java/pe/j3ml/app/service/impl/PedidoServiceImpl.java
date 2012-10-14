@@ -68,10 +68,10 @@ public class PedidoServiceImpl implements PedidoService {
     	PedidoNegocio neg = new PedidoNegocio();
     	int nPedido = 0;
     	try {
-    		nPedido=neg.numeroPedido();
-    		} catch (DAOExcepcion e) {
+    		nPedido = neg.numeroPedido();
+    	} catch (DAOExcepcion e) {
 			e.printStackTrace();
-    		}
+    	}
         return nPedido;
     }		  
 	   
@@ -109,7 +109,7 @@ public class PedidoServiceImpl implements PedidoService {
 			e.printStackTrace();
 		}		
 		//servletResponse.sendRedirect(urlReturn);		
-		servletResponse.sendRedirect("../../pedido.jsp");		
+		//servletResponse.sendRedirect("../../pedido.jsp");		
 	}
 	
 }

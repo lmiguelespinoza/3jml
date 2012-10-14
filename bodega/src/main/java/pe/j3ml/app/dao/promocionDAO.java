@@ -17,7 +17,7 @@ public class promocionDAO  extends baseDAO  {
 	
 	 public void insertar(Promocion vo) throws DAOExcepcion {
 	        System.out.println("promocionDAO: insertar(Promocion vo)");
-	        String query = "INSERT INTO mpromocion(PrmNombre, PrmFecIni, PrmFecFin, ProdCodigo, PrmCantidad,PrmPrecio) VALUES (?,?,?,?,?,?)";
+	        String query = "INSERT INTO mpromocion (PrmNombre, PrmFecIni, PrmFecFin, ProCodigo, PrmCantidad,PrmPrecio) VALUES (?,?,?,?,?,?)";
 
 	        Connection con = null;
 	        PreparedStatement stmt = null;
@@ -62,7 +62,7 @@ public class promocionDAO  extends baseDAO  {
        public void actualizar(int codigoProducto, double cantidadVendida) throws DAOExcepcion {
             Promocion promocion = getInfo(codigoProducto);
             System.out.println("promocionDAO: actualizar(codigoProducto, cantidadVendida)");
-            String query = "UPDATE MPromociones" + " set PrmCantid = ? WHERE ProCodigo = ?";
+            String query = "UPDATE MPromocion" + " set PrmCantidad = ? WHERE ProCodigo = ?";
             Connection con = null;
             PreparedStatement stmt = null;
             try {
@@ -90,7 +90,7 @@ public class promocionDAO  extends baseDAO  {
 
      public Promocion getInfo(int codigoProducto)  throws DAOExcepcion {
             System.out.println("promocionDAO: getInfo(int codigoProducto)");
-            String query = "SELECT PrmNombre, PrmFecini, PrmFecfin, PrmCantid, PrmPrecio FROM MPromociones WHERE ProCodigo = ?";
+            String query = "SELECT PrmNombre, PrmFecini, PrmFecfin, PrmCantidad, PrmPrecio FROM MPromocion WHERE ProCodigo = ?";
 
             Connection con = null;
             PreparedStatement stmt = null;
@@ -121,7 +121,7 @@ public class promocionDAO  extends baseDAO  {
 
      public Collection <Promocion> getPromociones()  throws DAOExcepcion {
             System.out.println("promocionDAO: getPromociones()");
-            String query = "SELECT PrmNombre, PrmFecini, PrmFecfin,  PrmCantid, PrmPrecio, ProCodigo FROM MPromociones";
+            String query = "SELECT PrmNombre, PrmFecini, PrmFecfin,  PrmCantidad, PrmPrecio, ProCodigo FROM MPromocion";
 
             Connection con = null;
             PreparedStatement stmt = null;

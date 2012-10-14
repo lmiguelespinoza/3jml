@@ -4,6 +4,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 CREATE SCHEMA IF NOT EXISTS `3JML` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
 USE `3JML` ;
+
 -- -----------------------------------------------------
 -- Table `3JML`.`MUsuario`
 -- -----------------------------------------------------
@@ -48,15 +49,15 @@ CREATE  TABLE IF NOT EXISTS `3JML`.`MProducto` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `3JML`.`MPromociones`
+-- Table `3JML`.`MPromocion`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `3JML`.`MPromociones` (
+CREATE  TABLE IF NOT EXISTS `3JML`.`MPromocion` (
   `PrmCodigo` INT NOT NULL AUTO_INCREMENT ,  
   `PrmNombre` VARCHAR(45) NULL ,
   `PrmFecini` VARCHAR(15) NULL ,
   `PrmFecfin` VARCHAR(15) NULL ,
   `ProCodigo` INT NOT NULL,
-  `PrmCantid` DECIMAL(6,2) NULL ,
+  `PrmCantidad` DECIMAL(6,2) NULL ,
   `PrmPrecio` DECIMAL(6,2) NULL ,
    PRIMARY KEY (`PrmCodigo`) )
 ENGINE = InnoDB;
@@ -66,7 +67,7 @@ ENGINE = InnoDB;
 -- Table `3JML`.`MCPedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `3JML`.`MCPedido` (
-  `PedCodigo`      INT           DEFAULT 0,
+  `PedCodigo`      INT,
   `UsuNombre`      VARCHAR(60)   DEFAULT '',
   `CliRUC`         VARCHAR(15)   DEFAULT '' ,
   `CliRazonSocial` VARCHAR(60)   DEFAULT '' ,
@@ -83,8 +84,8 @@ ENGINE = InnoDB;
 -- Table `3JML`.`MDPedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `3JML`.`MDPedido` (
-  `PedCodigo`   INT           DEFAULT 0,
-  `ProCodigo`   INT           DEFAULT 0,
+  `PedCodigo`   INT,
+  `ProCodigo`   INT,
   `ProNombre`   VARCHAR(45)   DEFAULT '',
   `ProUnivta`   VARCHAR(15)   DEFAULT '',
   `PedCantidad` INT           DEFAULT 0,  
@@ -139,8 +140,8 @@ INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`K
 INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(8,40,0,' ');
 INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(9,50,0,' ');
 
-INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012','01/01/2012','01/02/2012',1,20.00,15.00);
-INSERT INTO `3JML`.`MPromociones` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012','01/09/2012','01/10/2012',5,100.00,50.00);
+INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012','01/01/2012','01/02/2012',1,20.00,15.00);
+INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012','01/09/2012','01/10/2012',5,100.00,50.00);
 
 INSERT INTO `3JML`.`MCliente` (`CliRUC`,`CliRazonSocial`,`CliDireccion`,`CliDistrito`,`CliTelefono`,`CliCelular`,`CliCorreo`, `CliContacto`,`CliContactoTel`,`CliContactoCor`,`CliEstado`) 
 Values('20102097654','BODEGA CHACARILLA SCR LTDA','JR. JIRON MONTEGRANDE #197','SANTIAGO DE SURCO','365676','365676','bodegachacarilla@3jml.com.pe','','','','Activo');

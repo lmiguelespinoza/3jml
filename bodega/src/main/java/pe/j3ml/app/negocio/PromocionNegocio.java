@@ -22,13 +22,12 @@ public class PromocionNegocio {
 			System.out.println("PARAMETROS INVALIDOS");
 			throw new DAOExcepcion("PARAMETROS INVALIDOS");
 		} else {
-			Promocion promocion = new Promocion(nombre, fecIni, fecFin, codpro,
-					cantidad, precio);
+			Promocion promocion = new Promocion(nombre, fecIni, fecFin, codpro,	cantidad, precio);
 			promocionDAO dao = new promocionDAO();
 			try {
 				dao.insertar(promocion);
 			} catch (DAOExcepcion e) {
-				throw new DAOExcepcion("ERROR INSERTAR CLIENTE");
+				throw new DAOExcepcion("ERROR INSERTAR PROMOCION");
 			}
 		}
 	}
@@ -37,7 +36,7 @@ public class PromocionNegocio {
         try {
 	dao.actualizar(codigoProducto, cantidadVendida);
         } catch (DAOExcepcion e) {
-	throw new DAOExcepcion("ERROR INSERTAR CLIENTE");
+	throw new DAOExcepcion("ERROR INSERTAR PROMOCION");
         }
 }
 
@@ -47,7 +46,7 @@ public class PromocionNegocio {
 	Promocion promocion = dao.getInfo(codigoProducto);
             return promocion;
         } catch (DAOExcepcion e) {
-	throw new DAOExcepcion("ERROR INSERTAR CLIENTE");
+	throw new DAOExcepcion("ERROR INSERTAR PROMOCION");
         }
     }
 
@@ -93,7 +92,7 @@ public class PromocionNegocio {
             }
             return promocionW;
         } catch (DAOExcepcion e) {
-	throw new DAOExcepcion("ERROR INSERTAR CLIENTE");
+	throw new DAOExcepcion("ERROR INSERTAR PROMOCION");
         }
     }
 	
