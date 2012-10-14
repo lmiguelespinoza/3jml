@@ -140,8 +140,8 @@ INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`K
 INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(8,40,0,' ');
 INSERT INTO `3JML`.`MKardex` (`ProCodigo`,`KrdCantidadReal`,`KrdTotalPedidos`,`KrdFechaHoraUltimoPedido`) VALUES(9,50,0,' ');
 
-INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('MILO PLUS 2012','01/01/2012','01/02/2012',1,20.00,15.00);
-INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantid`,`PrmPrecio`) VALUES('PRIMAVERA 2012','01/09/2012','01/10/2012',5,100.00,50.00);
+INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantidad`,`PrmPrecio`) VALUES('MILO PLUS 2012','01/01/2012','01/02/2012',1,20.00,15.00);
+INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`,`PrmCantidad`,`PrmPrecio`) VALUES('PRIMAVERA 2012','01/09/2012','01/10/2012',5,100.00,50.00);
 
 INSERT INTO `3JML`.`MCliente` (`CliRUC`,`CliRazonSocial`,`CliDireccion`,`CliDistrito`,`CliTelefono`,`CliCelular`,`CliCorreo`, `CliContacto`,`CliContactoTel`,`CliContactoCor`,`CliEstado`) 
 Values('20102097654','BODEGA CHACARILLA SCR LTDA','JR. JIRON MONTEGRANDE #197','SANTIAGO DE SURCO','365676','365676','bodegachacarilla@3jml.com.pe','','','','Activo');
