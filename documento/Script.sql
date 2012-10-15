@@ -146,4 +146,10 @@ INSERT INTO `3JML`.`MPromocion` (`PrmNombre`,`PrmFecini`,`PrmFecfin`,`ProCodigo`
 INSERT INTO `3JML`.`MCliente` (`CliRUC`,`CliRazonSocial`,`CliDireccion`,`CliDistrito`,`CliTelefono`,`CliCelular`,`CliCorreo`, `CliContacto`,`CliContactoTel`,`CliContactoCor`,`CliEstado`) 
 Values('20102097654','BODEGA CHACARILLA SCR LTDA','JR. JIRON MONTEGRANDE #197','SANTIAGO DE SURCO','365676','365676','bodegachacarilla@3jml.com.pe','','','','Activo');
 
- 
+
+INSERT INTO `3JML`.`MCPedido` (`PedCodigo`, `UsuNombre`, `CliRUC`, `CliRazonSocial`, `CliDireccion`, `CliDistrito`, `PedFecReg`, `PedFecAte`, `PedTotal`, `PedEstado`)
+Values(1,'JZ', '1009878627', 'PRX', 'STAISABEL','SURCO', '20121010', '20121011', 1000, 'I');
+
+INSERT INTO `3JML`.`MDPedido` (`PedCodigo`, `ProCodigo`, `ProNombre`, `ProUnivta`, `PedCantidad`, `ProPrecio`, `PedParcial`)
+Values(1,1, 'ARROZ', 'KILO', 10, 101.50, 50.50);
+
