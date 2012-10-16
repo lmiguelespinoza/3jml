@@ -2,21 +2,24 @@
 
 El presente proyecto es brindar una solución integral para registrar los pedidos de los vendedores, así como consultar en tiempo real la mercadería disponible para ofertar a los clientes (promociones)
 
-#Equipo
-Equipo: 3JML
+#Equipo :  3JML
 
-Integrantes
+Integrantes:
 
 José Zavala - u201021387
+
 Juan Ortega - u201121813
+
 Judith Flores - u200700064
+
 Luis Miguel - u200814509
 
-Profesor
+
+Profesor:
 
 José Díaz Díaz
 
-## Arquitectura
+# Arquitectura
 Para su desarrollo se uso :
 
 	Java
@@ -27,7 +30,7 @@ Para su desarrollo se uso :
 	Usa servicios web SOAP, REST y  Mensajería	
 
 
-## User Story
+# User Story
 Iniciar sesión:
 
 	Permite registrarse como usuario.
