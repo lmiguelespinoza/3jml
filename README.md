@@ -6,13 +6,13 @@ El presente proyecto es brindar una solución integral para registrar los pedidos
 
 Integrantes:
 
-José Zavala - u201021387	
+José Zavala - u201021387	http://dsdjzavalaf.blogspot.com
 
 Juan Ortega - u201121813		http://jortegam-dsd.blogspot.com
 
 Judith Flores - u200700064	http://dsd-sistemasdistribuidos.blogspot.com 
 
-Luis Miguel - u200814509
+Luis Miguel - u200814509		http://lmiguel-upc.blogspot.com
 
 
 Profesor:
