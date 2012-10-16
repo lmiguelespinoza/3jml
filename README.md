@@ -8,7 +8,7 @@ Integrantes:
 
 José Zavala - u201021387	
 
-Juan Ortega - u201121813
+Juan Ortega - u201121813		http://jortegam-dsd.blogspot.com
 
 Judith Flores - u200700064	http://dsd-sistemasdistribuidos.blogspot.com 
 
